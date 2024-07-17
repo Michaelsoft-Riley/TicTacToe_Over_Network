@@ -19,10 +19,14 @@ def send():
 def recieve():
     while True:
         response = client.recv(1024).decode()
-        if response != "":    
+        if response != "":  
+            # convert response to tuple
             response = response.split(",")
+            response = (int(response[0]), int(response[1]))
+
             print(response)
             grid.select_slot(response, 0)
+            print(grid.slots)
 
 
 # TODO: give each new connection a thread to allow for multiple connections and simultaneous games
