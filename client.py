@@ -1,6 +1,8 @@
 import socket
 import threading
 
+# TODO: assign server output string values to each slot.
+
 server = socket.socket()
 port = 12345
 
