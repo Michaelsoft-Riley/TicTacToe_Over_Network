@@ -2,6 +2,9 @@ import socket
 import threading
 from grid import Grid
 
+# TODO: send victory indicator to client
+# TODO: only send the client the coordinate and team value for each updated slot
+
 server = socket.socket()
 port = 12345
 server.bind(('', port))
@@ -24,9 +27,13 @@ def recieve():
             response = response.split(",")
             response = (int(response[0]), int(response[1]))
 
+            # accept client slot selection
             print(response)
-            grid.select_slot(response, 0)
+            team_progress = grid.select_slot(response, 0)
+
+            # send client current grid progress
             print(grid.slots)
+            client.send(team_progress.encode())
 
 
 # TODO: give each new connection a thread to allow for multiple connections and simultaneous games
