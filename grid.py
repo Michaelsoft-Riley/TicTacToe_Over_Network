@@ -1,44 +1,43 @@
 class Grid:
-    def __init__(self, slots, rows):
-        # used to track which slots are owned by which team
-        slots = {
-            (1, 1): "",
-            (1, 2): "",
-            (1, 3): "",
-            (2, 1): "",
-            (2, 2): "",
-            (2, 3): "",
-            (3, 1): "",
-            (3, 2): "",
-            (3, 3): ""
-        }
+    # used to track which slots are owned by which team
+    slots = {
+        (1, 1): "",
+        (1, 2): "",
+        (1, 3): "",
+        (2, 1): "",
+        (2, 2): "",
+        (2, 3): "",
+        (3, 1): "",
+        (3, 2): "",
+        (3, 3): ""
+    }
 
-        # Team points for each row. + or - 3 points is a win. (rownumber: points)
-        # Team X is negative points, and team O is positive.
-        row_points = {
-            1: 0,
-            2: 0,
-            3: 0,
-            4: 0,
-            5: 0,
-            6: 0,
-            7: 0,
-            8: 0
-        }
+    # Team points for each row. + or - 3 points is a win. (rownumber: points)
+    # Team X is negative points, and team O is positive.
+    row_points = {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0,
+        6: 0,
+        7: 0,
+        8: 0
+    }
 
-        # vertical rows
-        row1_v = {(1, 1), (1, 2), (1, 3)}
-        row2_v = {(2, 3), (2, 1), (2, 2)}
-        row3_v = {(3, 1), (3, 2), (3, 3)}
-        # horizontal rows
-        row4_h = {(3, 1), (1, 1), (2, 1)}
-        row5_h = {(3, 2), (1, 2), (2, 2)}
-        row6_h = {(2, 3), (3, 3), (1, 3)}
-        # diagonal rows
-        row7_d = {(1, 1), (2, 2), (3, 3)}
-        row8_d = {[1, 3], (2, 2), (3, 1)}
-        # all
-        rows = [row1_v, row2_v, row3_v, row4_h, row5_h, row6_h, row7_d, row8_d]
+    # vertical rows
+    row1_v = {(1, 1), (1, 2), (1, 3)}
+    row2_v = {(2, 3), (2, 1), (2, 2)}
+    row3_v = {(3, 1), (3, 2), (3, 3)}
+    # horizontal rows
+    row4_h = {(3, 1), (1, 1), (2, 1)}
+    row5_h = {(3, 2), (1, 2), (2, 2)}
+    row6_h = {(2, 3), (3, 3), (1, 3)}
+    # diagonal rows
+    row7_d = {(1, 1), (2, 2), (3, 3)}
+    row8_d = {(1, 3), (2, 2), (3, 1)}
+    # all
+    rows = [row1_v, row2_v, row3_v, row4_h, row5_h, row6_h, row7_d, row8_d]
 
 
     # Accepts an (x,y) coordinate and assigns it to the slot at (coordinate).
@@ -93,8 +92,6 @@ class Grid:
             print("Team O wins!")
         elif self.row_points[(points_key)] < -2:
             print("Team X wins!")
-        else:
-            print(f"Error: {self.row_points[(points_key)]} points is not enough for a victory. How did I get here?")
             
 
     # # Generate row values
