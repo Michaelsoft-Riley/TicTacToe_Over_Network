@@ -1,16 +1,19 @@
 class Grid:
+    #TODO: use integers instead of chars for team tracking
+
     # used to track which slots are owned by which team
     slots = {
-        (1, 1): "",
-        (1, 2): "",
-        (1, 3): "",
-        (2, 1): "",
-        (2, 2): "",
-        (2, 3): "",
-        (3, 1): "",
-        (3, 2): "",
-        (3, 3): ""
+        (1, 1): "|",
+        (1, 2): "|",
+        (1, 3): "|",
+        (2, 1): "|",
+        (2, 2): "|",
+        (2, 3): "|",
+        (3, 1): "|",
+        (3, 2): "|",
+        (3, 3): "|"
     }
+
 
     # Team points for each row. + or - 3 points is a win. (rownumber: points)
     # Team X is negative points, and team O is positive.
@@ -40,19 +43,23 @@ class Grid:
     rows = [row1_v, row2_v, row3_v, row4_h, row5_h, row6_h, row7_d, row8_d]
 
 
-    # Accepts an (x,y) coordinate and assigns it to the slot at (coordinate).
+    # Accepts an (x,y) coordinate as a tuple.
+    # Takes an integer for team. (X=0, O=1)
     # Gives the team a point on each row that contains (coordinate).
+    # Returns the current grid
     def select_slot(self, coordinate, team):
         if self.is_available(coordinate):
             self.assign_slot(coordinate, team)
             self.give_point(coordinate, team)
+
+            return self.get_progress()
         else:
             print("I can't build here!")
 
 
     # Checks that a slot doesn't belong to a team yet
     def is_available(self, coordinate):
-        if self.slots[coordinate] == "":
+        if self.slots[coordinate] == "|":
             return True
         
 
@@ -73,9 +80,8 @@ class Grid:
                 
                 # Check for victory
                 self.is_win(points_key)
-                
 
-    # TODO: both methods need is_available to be ran, so move it out of here and into a run() method or something instead of calling it twice.
+
     # Assigns slot to specified team if it is not taken. Takes an integer for team. (X=0, O=1)
     def assign_slot(self, coordinate, team):
             if team == 0:
@@ -92,6 +98,22 @@ class Grid:
             print("Team O wins!")
         elif self.row_points[(points_key)] < -2:
             print("Team X wins!")
+
+
+    # TODO: adjust this when slots are assigned a team instead of doing this every time.
+    # returns the team value for each slot in the grid as a list of chars in order
+    def get_progress(self):
+        progress = ""
+        progress += self.slots[1,1]
+        progress += self.slots[1,2]
+        progress += self.slots[1,3]
+        progress += self.slots[2,1]
+        progress += self.slots[2,2]
+        progress += self.slots[3,2]
+        progress += self.slots[3,1]
+        progress += self.slots[3,2]
+        progress += self.slots[3,3]
+        return progress
             
 
     # # Generate row values
