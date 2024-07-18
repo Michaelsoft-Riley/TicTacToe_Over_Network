@@ -97,11 +97,11 @@ class Grid:
     def is_win(self, points_key):
         if self.row_points[(points_key)] > 2:
             print("Team O wins!")
-            win = 1
+            self.win = 1
             return True
         elif self.row_points[(points_key)] < -2:
             print("Team X wins!")
-            win = -1
+            self.win = -1
             return True
 
 
