@@ -119,6 +119,32 @@ class Grid:
         progress += self.slots[3,2]
         progress += self.slots[3,3]
         return progress
+    
+
+    # TODO: is this really the best way to do this in python?
+    def reset(self):
+        self.win = 0
+        self.slots = {
+            (1, 1): "|",
+            (1, 2): "|",
+            (1, 3): "|",
+            (2, 1): "|",
+            (2, 2): "|",
+            (2, 3): "|",
+            (3, 1): "|",
+            (3, 2): "|",
+            (3, 3): "|"
+        }
+        self.row_points = {
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0,
+            6: 0,
+            7: 0,
+            8: 0
+        }
             
 
     # # Generate row values
