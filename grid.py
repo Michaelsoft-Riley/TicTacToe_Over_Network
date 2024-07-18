@@ -128,7 +128,7 @@ class Grid:
         lowest = 0
         index = 0
         for i in range(0,8):
-            if self.rows[i] < lowest:
+            if self.row_points[i] < lowest:
                 lowest = self.rows[i]
                 index = i
 
