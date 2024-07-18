@@ -22,18 +22,18 @@ def send():
 def recieve():
     while True:
         response = client.recv(1024).decode()
-        if response != "":  
+        if response != None:  
             # convert response to tuple
             response = response.split(",")
             response = (int(response[0]), int(response[1]))
 
             # accept client slot selection
             print(response)
-            team_progress = grid.select_slot(response, 0)
+            grid.select_slot(response, 0)
 
             # send client current grid progress
             print(grid.slots)
-            client.send(team_progress.encode())
+            client.send(grid.get_progress.encode())
 
 
 # TODO: give each new connection a thread to allow for multiple connections and simultaneous games
