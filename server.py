@@ -31,9 +31,19 @@ def recieve():
             print(response)
             grid.select_slot(response, 0)
 
+            # if win
+            if grid.win != 0:
+                # send victory to client
+                if grid.win < 0:
+                    client.send("WIN X".encode())
+                elif grid.win > 0:
+                    client.send("WIN O".encode())
+                # reset the grid
+                grid = Grid()
+
             # send client current grid progress
             print(grid.slots)
-            client.send(grid.get_progress.encode())
+            client.send(grid.get_progress().encode())
 
 
 # TODO: give each new connection a thread to allow for multiple connections and simultaneous games
