@@ -8,6 +8,8 @@ def update_buttons(progress):
     for i in range(0, 9):
         if progress[i] != "|":
             buttons[i].config(text=progress[i])
+        else:
+            buttons[i].config(text="")
 
 server = socket.socket()
 port = 12345
