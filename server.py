@@ -47,6 +47,14 @@ def recieve():
                 print(grid.slots)
                 client.send(grid.get_progress().encode())
 
+            # opponent's turn
+            else:
+                grid.opponent()
+                # send client current grid progress
+                print(grid.slots)
+                client.send(grid.get_progress().encode())
+
+
 
 # TODO: give each new connection a thread to allow for multiple connections and simultaneous games
 while True:
