@@ -1,5 +1,7 @@
 class Grid:
-    #TODO: use integers instead of chars for team tracking
+    # TODO: use integers instead of strings for team tracking
+    # TODO: fuction to automate opponent always selecting an open slot in a row with more points.
+    # TODO: option to play with other players (remember to add a check before running ai-player select)
 
     # used to track which slots are owned by which team
     slots = {
@@ -51,8 +53,6 @@ class Grid:
         if self.is_available(coordinate):
             self.assign_slot(coordinate, team)
             self.give_point(coordinate, team)
-
-            return self.get_progress()
         else:
             print("I can't build here!")
 
@@ -63,7 +63,6 @@ class Grid:
             return True
         
 
-    # TODO: add check for win condition
     # If the slot coordinate is in a row, add a point for that team under the row in row_points
     # For each row assigned a point, uses is_win to check for victory
     # Accepts coordinate(tuple) and team(0 or 1)
@@ -109,7 +108,7 @@ class Grid:
         progress += self.slots[1,3]
         progress += self.slots[2,1]
         progress += self.slots[2,2]
-        progress += self.slots[3,2]
+        progress += self.slots[2,3]
         progress += self.slots[3,1]
         progress += self.slots[3,2]
         progress += self.slots[3,3]
