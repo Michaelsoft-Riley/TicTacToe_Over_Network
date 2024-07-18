@@ -6,11 +6,10 @@ import threading
 server = socket.socket()
 port = 12345
 
-server.connect(("10.0.0.35", port))
+server.connect(("10.0.0.26", port))
 
-def send():
-    while True:
-        response = input()
+def send(response):
+    if response != None:
         server.send(response.encode())
 
 def recieve():
@@ -19,6 +18,3 @@ def recieve():
 
 recieve_thread = threading.Thread(target=recieve)
 recieve_thread.start()
-
-send_thread = threading.Thread(target=send)
-send_thread.start()
