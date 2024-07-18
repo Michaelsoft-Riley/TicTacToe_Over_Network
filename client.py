@@ -19,7 +19,14 @@ def send(response):
 
 def recieve():
     while True:
-        update_buttons(server.recv(1024).decode())
+        response = server.recv(1024).decode()
+        if "WIN" in response:
+            if "WIN X":
+                print("You win!")
+            else:
+                print("You lose!")
+        else:
+            update_buttons(response)
 
 recieve_thread = threading.Thread(target=recieve)
 recieve_thread.start()
