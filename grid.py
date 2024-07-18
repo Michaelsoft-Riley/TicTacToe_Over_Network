@@ -1,7 +1,8 @@
 class Grid:
-    # TODO: use integers instead of strings for team tracking
+    # TODO: use integers instead of strings for team tracking?
     # TODO: fuction to automate opponent always selecting an open slot in a row with more points.
     # TODO: option to play with other players (remember to add a check before running ai-player select)
+    win = 0
 
     # used to track which slots are owned by which team
     slots = {
@@ -78,7 +79,8 @@ class Grid:
                     self.row_points[(points_key)] += 1
                 
                 # Check for victory
-                self.is_win(points_key)
+                if self.is_win(points_key):
+                    return
 
 
     # Assigns slot to specified team if it is not taken. Takes an integer for team. (X=0, O=1)
@@ -95,8 +97,12 @@ class Grid:
     def is_win(self, points_key):
         if self.row_points[(points_key)] > 2:
             print("Team O wins!")
+            win = 1
+            return True
         elif self.row_points[(points_key)] < -2:
             print("Team X wins!")
+            win = -1
+            return True
 
 
     # TODO: adjust this when slots are assigned a team instead of doing this every time.
