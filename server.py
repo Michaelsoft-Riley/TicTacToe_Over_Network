@@ -31,15 +31,13 @@ def recieve():
             print(response)
             grid.select_slot(response, 0)
 
-            # if win
+            # if win, send victory to client and reset grid
             if grid.win != 0:
-                # send victory to client
                 if grid.win < 0:
                     client.send("WIN X".encode())
                 elif grid.win > 0:
                     client.send("WIN O".encode())
-                # reset the grid
-                grid = Grid()
+                grid.reset()
 
             # send client current grid progress
             print(grid.slots)
