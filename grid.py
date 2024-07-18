@@ -121,6 +121,28 @@ class Grid:
         return progress
     
 
+    # TODO: choose randomly between best choices
+    # selects a coordinate in a row where team X has the most points
+    def opponent(self):
+        # team X has negative points, so we want the row with the lowest points
+        lowest = 0
+        index = 0
+        for i in range(0,8):
+            if self.rows[i] < lowest:
+                lowest = self.rows[i]
+                index = i
+
+        # find an available slot and take it
+        row = self.rows[i]
+        for coord in row:
+            if self.slots[coord] == "|":
+                self.select_slot(coord, 1)
+                break
+
+        self.select_slot()
+            
+    
+
     # TODO: is this really the best way to do this in python?
     def reset(self):
         self.win = 0
