@@ -1,6 +1,5 @@
 class Grid:
     # TODO: use integers instead of strings for team tracking?
-    # TODO: fuction to automate opponent always selecting an open slot in a row with more points.
     # TODO: option to play with other players (remember to add a check before running ai-player select)
     win = ""
 
@@ -94,8 +93,6 @@ class Grid:
                 self.slots[coordinate] = "O"
     
 
-    # TODO: Adjust victory display for UI
-    # TODO: End or reset the game
     # Checks for three in a row
     def is_win(self, points_key):
         if self.row_points[(points_key)] > 2:
@@ -113,10 +110,11 @@ class Grid:
             if self.slots[key] == "|":
                 return False
         self.win = "DRAW"
+        print("Draw!")
         return True
 
 
-    # TODO: adjust this when slots are assigned a team instead of doing this every time.
+    # TODO: only adjust the string for each new slot assignment, instead of generating it from scratch.
     # returns the team value for each slot in the grid as a list of chars in order
     def get_progress(self):
         progress = ""
@@ -132,7 +130,6 @@ class Grid:
         return progress
     
 
-    # TODO: exclude unavailable rows
     # TODO: opponent should only be ran if user's choice was available
     # TODO: choose randomly between best choices
     # selects a coordinate in a row where team X has the most points
@@ -150,7 +147,7 @@ class Grid:
         for coord in row:
             if self.slots[coord] == "|":
                 self.select_slot(coord, 1)
-                break
+                return
             
     
     def reset(self):
