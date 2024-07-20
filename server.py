@@ -36,11 +36,13 @@ def recieve():
             client.send(grid.get_progress().encode())
 
             # if win, send victory to client and reset grid
-            if grid.win != 0:
-                if grid.win < 0:
+            if grid.win != "":
+                if grid.win < "X":
                     client.send("WIN X".encode())
-                elif grid.win > 0:
+                elif grid.win > "O":
                     client.send("WIN O".encode())
+                else:
+                    client.send("WIN DRAW".encode())
                 grid.reset()
 
                 # send client current grid progress
