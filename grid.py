@@ -81,6 +81,9 @@ class Grid:
                 # Check for victory
                 if self.is_win(points_key):
                     return
+                # Check for draw
+                if self.is_draw():
+                    return
 
 
     # Assigns slot to specified team if it is not taken. Takes an integer for team. (X=0, O=1)
