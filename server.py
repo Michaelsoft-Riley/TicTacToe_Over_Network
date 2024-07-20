@@ -2,7 +2,8 @@ import socket
 import threading
 from grid import Grid
 
-# TODO: only send the client the coordinate and team value for each updated slot
+# TODO: Close the connections when either side disconnects so that the program isn't stopped by an error.
+# TODO: Send client the coordinate and team value for each updated slot, instead of generating a string of team values.
 
 server = socket.socket()
 port = 12345
@@ -21,35 +22,37 @@ def send():
 def recieve():
     while True:
         response = client.recv(1024).decode()
-        if response != None:  
-            # convert response to tuple
-            response = response.split(",")
-            response = (int(response[0]), int(response[1]))
+        if response != None:
+            # Send team string when "OK" is recieved indicating that a win/lose message box has been closed.
+            if "OK" in response:
+                print(grid.slots)
+                client.send(grid.get_progress().encode())
 
-            # accept client slot selection
-            print(response)
-            grid.select_slot(response, 0)
+            else:
+                # convert response to tuple
+                response = response.split(",")
+                response = (int(response[0]), int(response[1]))
 
-            # opponent's turn
-            grid.opponent()
+                # accept client slot selection
+                print(response)
+                grid.select_slot(response, 0)
 
-            # send client current grid progress
-            print(grid.slots)
-            client.send(grid.get_progress().encode())
-
-            # if win, send victory to client and reset grid
-            if grid.win != "":
-                if grid.win == "X":
-                    client.send("WIN X".encode())
-                elif grid.win == "O":
-                    client.send("WIN O".encode())
-                else:
-                    client.send("WIN DRAW".encode())
-                grid.reset()
+                # opponent's turn
+                grid.opponent()
 
                 # send client current grid progress
                 print(grid.slots)
                 client.send(grid.get_progress().encode())
+
+                # if win, send victory to client and reset grid
+                if grid.win != "":
+                    if grid.win == "X":
+                        client.send("WIN X".encode())
+                    elif grid.win == "O":
+                        client.send("WIN O".encode())
+                    else:
+                        client.send("WIN DRAW".encode())
+                    grid.reset()
 
 
 

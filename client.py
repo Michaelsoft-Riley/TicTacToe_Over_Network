@@ -5,6 +5,7 @@ from tkinter import messagebox
 
 # TODO: update individual buttons as needed, instead of all for each loop
 # TODO: Split this back into a client.py and ui.py file.
+# TODO: Rename draw_message to tie_message.
 
 server = socket.socket()
 port = 12345
@@ -39,13 +40,16 @@ def update_buttons(progress):
             buttons[i].config(text="")
 
 def victory_message():
-        messagebox.showinfo(title="Victory!", message="You won!")
+    messagebox.showinfo(title="Victory!", message="You won!")
+    send("OK")
     
 def defeat_message():
     messagebox.showinfo(title="Defeat!", message="You lost!")
+    send("OK")
 
 def draw_message():
     messagebox.showinfo(title="Draw!", message="It's a draw!")
+    send("OK")
 
 
 recieve_thread = threading.Thread(target=recieve)
