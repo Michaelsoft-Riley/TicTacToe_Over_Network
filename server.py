@@ -2,7 +2,6 @@ import socket
 import threading
 from grid import Grid
 
-# TODO: send victory indicator to client
 # TODO: only send the client the coordinate and team value for each updated slot
 
 server = socket.socket()
@@ -31,6 +30,9 @@ def recieve():
             print(response)
             grid.select_slot(response, 0)
 
+            # opponent's turn
+            grid.opponent()
+
             # send client current grid progress
             print(grid.slots)
             client.send(grid.get_progress().encode())
@@ -45,13 +47,6 @@ def recieve():
                     client.send("WIN DRAW".encode())
                 grid.reset()
 
-                # send client current grid progress
-                print(grid.slots)
-                client.send(grid.get_progress().encode())
-
-            # opponent's turn
-            else:
-                grid.opponent()
                 # send client current grid progress
                 print(grid.slots)
                 client.send(grid.get_progress().encode())
