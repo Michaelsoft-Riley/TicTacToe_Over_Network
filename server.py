@@ -37,9 +37,9 @@ def recieve():
 
             # if win, send victory to client and reset grid
             if grid.win != "":
-                if grid.win < "X":
+                if grid.win == "X":
                     client.send("WIN X".encode())
-                elif grid.win > "O":
+                elif grid.win == "O":
                     client.send("WIN O".encode())
                 else:
                     client.send("WIN DRAW".encode())
