@@ -3,10 +3,8 @@ import threading
 from tkinter import *
 from tkinter import messagebox
 
-# TODO: check for draw
-# TODO: assign server output string values to each slot.
-# TODO: Only update buttons with changed progress.
-# TODO: Figure out how to split this into a client.py and ui.py file without creating a circular import
+# TODO: update individual buttons as needed, instead of all for each loop
+# TODO: Split this back into a client.py and ui.py file.
 
 server = socket.socket()
 port = 12345
@@ -67,7 +65,6 @@ row1.pack(side=TOP)
 row2.pack(side=TOP)
 row3.pack(side=TOP)
 
-# TODO: The text for these should start blank and be filled with the team letter as slots are assigned in grid.
 button1 = Button(row1, text='', width=15, height=7, command=lambda : send("1,1"))
 button2 = Button(row1, text='', width=15, height=7, command=lambda : send("1,2"))
 button3 = Button(row1, text='', width=15, height=7, command=lambda : send("1,3"))
