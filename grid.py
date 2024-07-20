@@ -1,5 +1,6 @@
 class Grid:
-    # TODO: use integers instead of strings for team tracking?
+    # TODO: FIX: opponent ai only checks for available slots in a single row. This can lead to the opponent 
+    #       not selecting a slot during their turn.
     # TODO: option to play with other players (remember to add a check before running ai-player select)
     win = ""
 
@@ -15,7 +16,6 @@ class Grid:
         (3, 2): "|",
         (3, 3): "|"
     }
-
 
     # Team points for each row. + or - 3 points is a win. (rownumber: points)
     # Team X is negative points, and team O is positive.
@@ -63,8 +63,16 @@ class Grid:
             return True
         
 
+    # Assigns slot to specified team if it is not taken. Takes an integer for team. (X=0, O=1)
+    def assign_slot(self, coordinate, team):
+            if team == 0:
+                self.slots[coordinate] = "X"
+            elif team == 1:
+                self.slots[coordinate] = "O"
+
+
     # If the slot coordinate is in a row, add a point for that team under the row in row_points
-    # For each row assigned a point, uses is_win to check for victory
+    # Each time a point is added is_win and is_draw are used to check whether the game should end.
     # Accepts coordinate(tuple) and team(0 or 1)
     # X(0) points are negative, and O(1) points are positive
     def give_point(self, coordinate, team):
@@ -74,23 +82,15 @@ class Grid:
                 points_key = index + 1
                 if team == 0:   
                     self.row_points[(points_key)] -= 1
-                if team == 1:   
+                elif team == 1:   
                     self.row_points[(points_key)] += 1
                 
                 # Check for victory
                 if self.is_win(points_key):
                     return
-                # Check for draw
-                if self.is_draw():
-                    return
-
-
-    # Assigns slot to specified team if it is not taken. Takes an integer for team. (X=0, O=1)
-    def assign_slot(self, coordinate, team):
-            if team == 0:
-                self.slots[coordinate] = "X"
-            elif team == 1:
-                self.slots[coordinate] = "O"
+        # Check for draw
+        if self.is_draw():
+            return
     
 
     # Checks for three in a row
@@ -114,7 +114,7 @@ class Grid:
         return True
 
 
-    # TODO: only adjust the string for each new slot assignment, instead of generating it from scratch.
+    # TODO: Only adjust the string for each new slot assignment, instead of always generating it from scratch.
     # returns the team value for each slot in the grid as a list of chars in order
     def get_progress(self):
         progress = ""
@@ -132,6 +132,7 @@ class Grid:
 
     # TODO: opponent should only be ran if user's choice was available
     # TODO: choose randomly between best choices
+    # TODO: choose the center if user chooses edge and does not have 2 points in a row yet?
     # selects a coordinate in a row where team X has the most points
     def opponent(self):
         # team X has negative points, so we want the row with the lowest points
