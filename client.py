@@ -8,7 +8,7 @@ from tkinter import messagebox
 
 server = socket.socket()
 port = 12345
-server.connect(("10.0.0.26", port))
+server.connect(("10.0.0.35", port))
 
 def send(response):
     if response != None:
@@ -18,10 +18,10 @@ def recieve():
     while True:
         response = server.recv(1024).decode()
         if "WIN" in response:
-            if response == "WIN X":
+            if "WIN X" in response:
                 print("You win!")
                 victory_message()
-            elif response == "WIN O":
+            elif "WIN O" in response:
                 print("You lose!")
                 defeat_message()
             else:
