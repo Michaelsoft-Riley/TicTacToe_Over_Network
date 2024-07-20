@@ -151,7 +151,7 @@ class Grid:
             
     
     def reset(self):
-        self.win = 0
+        self.win = ""
         self.slots = {
             (1, 1): "|",
             (1, 2): "|",
