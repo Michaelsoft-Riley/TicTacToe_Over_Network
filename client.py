@@ -13,10 +13,12 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 port = 12345
 server.connect(("10.0.0.35", port))
 
+# sends encoded data to server
 def send(response):
     if response != None:
         server.send(response.encode())
 
+# Recieves server response and updates UI accordingly
 def recieve():
     while True:
         try:
@@ -41,6 +43,7 @@ def recieve():
             break
 
 
+# Updates the button text on UI
 def update_buttons(progress):
     for i in range(0, 9):
         if progress[i] != "|":
@@ -48,6 +51,7 @@ def update_buttons(progress):
         else:
             buttons[i].config(text="")
 
+# These three messages display a message box and send a string to the server indicating that they have been closed
 def victory_message():
     messagebox.showinfo(title="Victory!", message="You won!")
     send("OK")
@@ -61,6 +65,7 @@ def draw_message():
     send("OK")
 
 
+# Give the recieve function a thread so that it can always be listening for server responses
 recieve_thread = threading.Thread(target=recieve)
 recieve_thread.start()
 

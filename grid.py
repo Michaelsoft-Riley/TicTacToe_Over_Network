@@ -105,6 +105,7 @@ class Grid:
             return True
         
 
+    # sets win to DRAW if all slots are taken
     def is_draw(self):
         for key in self.slots:
             if self.slots[key] == "|":
@@ -151,6 +152,7 @@ class Grid:
                 return
             
     
+    # Restores the grid's starting attributes
     def reset(self):
         self.win = ""
         self.slots = {
