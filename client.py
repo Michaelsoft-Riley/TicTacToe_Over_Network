@@ -9,6 +9,7 @@ from tkinter import messagebox
 # TODO: Split this back into a client.py and ui.py file.
 # TODO: Rename draw_message to tie_message.
 
+# connect to server
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 port = 12345
 server.connect(("10.0.0.35", port))
