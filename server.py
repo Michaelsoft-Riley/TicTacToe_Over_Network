@@ -2,7 +2,7 @@ import socket
 import threading
 from grid import Grid
 
-# TODO: Close the connections when either side disconnects so that the program isn't stopped by an error.
+# TODO: create a new instance of the game for each client
 
 # TODO: Allow user to choose between ai and human opponent
 # TODO: Users will connect to each other using unique passcodes
@@ -10,7 +10,7 @@ from grid import Grid
 
 # TODO: Send client the coordinate and team value for each updated slot, instead of generating a string of team values.
 
-server = socket.socket()
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 port = 12345
 server.bind(('', port))
 print(f"Socket bound to {port}")

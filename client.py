@@ -3,13 +3,13 @@ import threading
 from tkinter import *
 from tkinter import messagebox
 
-# TODO: Client program should either close or try to reconnect when disconnected from server.
 # TODO: IP address entry widget
+# TODO: Client should either close or try to reconnect when disconnected from server.
 # TODO: update individual buttons as needed, instead of all for each loop
 # TODO: Split this back into a client.py and ui.py file.
 # TODO: Rename draw_message to tie_message.
 
-server = socket.socket()
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 port = 12345
 server.connect(("10.0.0.35", port))
 
