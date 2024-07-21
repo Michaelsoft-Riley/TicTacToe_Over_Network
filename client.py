@@ -3,6 +3,8 @@ import threading
 from tkinter import *
 from tkinter import messagebox
 
+# TODO: Client program should either close or try to reconnect when disconnected from server.
+# TODO: IP address entry widget
 # TODO: update individual buttons as needed, instead of all for each loop
 # TODO: Split this back into a client.py and ui.py file.
 # TODO: Rename draw_message to tie_message.
@@ -17,19 +19,26 @@ def send(response):
 
 def recieve():
     while True:
-        response = server.recv(1024).decode()
-        if "WIN" in response:
-            if "WIN X" in response:
-                print("You win!")
-                victory_message()
-            elif "WIN O" in response:
-                print("You lose!")
-                defeat_message()
+        try:
+            response = server.recv(1024).decode()
+            if "WIN" in response:
+                if "WIN X" in response:
+                    print("You win!")
+                    victory_message()
+                elif "WIN O" in response:
+                    print("You lose!")
+                    defeat_message()
+                else:
+                    print("Draw!")
+                    draw_message()
             else:
-                print("Draw!")
-                draw_message()
-        else:
-            update_buttons(response)
+                update_buttons(response)
+        
+        # TODO: show a message window and close game window
+        except:
+            server.close()
+            print("Disconnected from server")
+            break
 
 
 def update_buttons(progress):
