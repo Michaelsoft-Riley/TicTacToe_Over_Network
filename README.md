@@ -3,14 +3,14 @@
 This is a simple TicTacToe server and client application that I created to practice using sockets and threading in python. The server can just be ran from the terminal using python, but to use the client you'll need to change the local ip address to the one the host machine is using.
 
 [Software Demo Video](https://youtu.be/mKeHsvf3gPo)
-Since recording this, I have limited the sockets to INET and set them to create a TCP connection.
+* Since recording this, I have set the sockets to use INET and TCP.
 
 # Network Communication
 
-Client/Server
-TCP
-Port: 12345
-Data is sent using encoded strings
+* Client/Server
+* TCP
+* Port: 12345
+* Data is sent using encoded strings
 
 # Development Environment
 
